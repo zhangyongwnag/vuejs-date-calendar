@@ -1,26 +1,26 @@
-# vue-date-calendar
+# vuejs-date-calendar
 [![Vue](https://img.shields.io/badge/vue-2.5.2-brightgreen.svg)](https://github.com/vuejs/vue)
-[![npm version](https://img.shields.io/npm/v/v-date-calendar)](https://www.npmjs.com/package/v-data-calendar)
-[![CircleCI](https://img.shields.io/circleci/build/github/zhangyongwnag/v-date-calendar/master)](https://circleci.com/gh/zhangyongwnag/workflows/v-date-calendar)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/zhangyongwnag/v-date-calendar/blob/master/LICENSE)
+[![npm version](https://img.shields.io/npm/v/vuejs-date-calendar)](https://www.npmjs.com/package/vuejs-date-calendar)
+[![CircleCI](https://img.shields.io/circleci/build/github/zhangyongwnag/vuejs-date-calendar/master)](https://circleci.com/gh/zhangyongwnag/workflows/vuejs-date-calendar)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/zhangyongwnag/vuejs-date-calendar/blob/master/LICENSE)
 
 
 
 ## Installation
 
 ```shell
-npm install --save vue-date-calendar
+npm install --save vuejs-date-calendar
 
 or
 
-yarn add vue-date-calendar
+yarn add vuejs-date-calendar
 ```
 
 ```js
 import Vue from 'vue'
-import vue-date-calendar from 'vue-date-calendar'
+import vuejs-date-calendar from 'vuejs-date-calendar'
 
-Vue.use(vue-date-calendar)
+Vue.use(vuejs-date-calendar)
 ```
 
 ## Usage

@@ -1,9 +1,9 @@
 {
-  "name": "vue-date-calendar",
+  "name": "vuejs-date-calendar",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "zhangyongwang <765298337@qq.com>",
-  "main": "dist/vue-date-calendar.js",
+  "main": "dist/vuejs-date-calendar.js",
   "directories": {
     "dist": "dist"
   },
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhangyongwnag/vue-date-calendar"
+    "url": "git+https://github.com/zhangyongwnag/vuejs-date-calendar"
   },
   "dependencies": {
     "moment": "^2.24.0",
@@ -78,7 +78,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zhangyongwnag/vue-date-calendar/issues"
+    "url": "https://github.com/zhangyongwnag/vuejs-date-calendar/issues"
   },
-  "homepage": "https://github.com/zhangyongwnag/vue-date-calendar/"
+  "homepage": "https://github.com/zhangyongwnag/vuejs-date-calendar/"
 }
