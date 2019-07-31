@@ -1,4 +1,4 @@
-import DateCalendar from './DateCalendar.vue'
+import DateCalendar from './vue-date-calendar.vue'
 
 const comment = (Vue) => {
   Vue.component('v-date-calendar', DateCalendar)

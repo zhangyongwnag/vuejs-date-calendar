@@ -44,18 +44,18 @@ module.exports = [
   merge(commonConfig, {
     entry: path.resolve(__dirname, './src/plugin.js'),
     output: {
-      filename: 'v-data-calendar.min.js',
+      filename: 'vue-date-calendar.min.js',
       libraryTarget: 'window',
-      library: 'v-data-calendar',
+      library: 'vue-date-calendar',
     }
   }),
 
   merge(commonConfig, {
     entry: path.resolve(__dirname, './src/plugin.js'),
     output: {
-      filename: 'v-data-calendar.js',
+      filename: 'vue-date-calendar.js',
       libraryTarget: 'umd',
-      library: 'v-data-calendar',
+      library: 'vue-date-calendar',
       umdNamedDefine: true
     }
   })

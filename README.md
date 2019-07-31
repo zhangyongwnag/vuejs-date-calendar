@@ -1,26 +1,26 @@
-# v-date-calendar
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/darrenfang/vuetify-datetime-picker/blob/master/LICENSE)
-[![npm version](https://img.shields.io/npm/v/vuetify-datetime-picker.svg?style=flat)](https://www.npmjs.com/package/vuetify-datetime-picker)
-[![CircleCI](https://img.shields.io/circleci/project/github/darrenfang/vuetify-datetime-picker.svg)](https://circleci.com/gh/darrenfang/vuetify-datetime-picker)
+# vue-date-calendar
+[![Vue](https://img.shields.io/badge/vue-2.5.2-brightgreen.svg)](https://github.com/vuejs/vue)
+[![npm version](https://img.shields.io/npm/v/v-date-calendar)](https://www.npmjs.com/package/v-data-calendar)
+[![CircleCI](https://img.shields.io/circleci/build/github/zhangyongwnag/v-date-calendar/master)](https://circleci.com/gh/zhangyongwnag/workflows/v-date-calendar)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/zhangyongwnag/v-date-calendar/blob/master/LICENSE)
 
-DatetimePicker component for Vuetify.js.
+
 
 ## Installation
 
 ```shell
-npm install --save vuetify-datetime-picker
+npm install --save vue-date-calendar
 
 or
 
-yarn add vuetify-datetime-picker
+yarn add vue-date-calendar
 ```
 
 ```js
 import Vue from 'vue'
-import DatetimePicker from 'vuetify-datetime-picker'
-import 'vuetify-datetime-picker/src/stylus/main.styl'
+import vue-date-calendar from 'vue-date-calendar'
 
-Vue.use(DatetimePicker)
+Vue.use(vue-date-calendar)
 ```
 
 ## Usage
@@ -28,10 +28,10 @@ Vue.use(DatetimePicker)
 Once installed, it can be used in a template as simply as:
 
 ```html
-<v-datetime-picker
-        label="Select Datetime"
-        v-model="datetime">
-</v-datetime-picker>
+<v-date-calendar
+        date="time"
+        v-model="show">
+</v-date-calendar>
 ```
 
 ## Properties
