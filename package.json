@@ -1,19 +1,24 @@
 {
-  "name": "data-calendar",
+  "name": "v-data-calendar",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "zhangyongwang <765298337@qq.com>",
-  "private": true,
+  "main": "dist/v-data-calendar.js",
+  "directories": {
+    "dist": "dist"
+  },
+  "private": false,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
-    "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "build": "rimraf ./dist && webpack --config ./webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhangyongwnag/v-date-calendar"
   },
   "dependencies": {
     "moment": "^2.24.0",
-    "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue": "^2.5.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -70,5 +75,10 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhangyongwnag/v-date-calendar/issues"
+  },
+  "homepage": "https://github.com/zhangyongwnag/v-date-calendar/"
 }
