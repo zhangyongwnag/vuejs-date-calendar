@@ -4,7 +4,10 @@
 [![CircleCI](https://img.shields.io/circleci/build/github/zhangyongwnag/vuejs-date-calendar/master)](https://circleci.com/gh/zhangyongwnag/workflows/vuejs-date-calendar)
 [![GitHub](https://img.shields.io/github/license/zhangyongwnag/vuejs-date-calendar)](https://github.com/zhangyongwnag/vuejs-date-calendar/blob/master/LICENSE)
 
+> A date-calendar for mobile (推荐手机浏览器打开)
 
+## Demo
+> [https://zhangyongwnag.github.io/vuejs-date-calendar/example/#/Home](https://zhangyongwnag.github.io/vuejs-date-calendar/example/#/Home)
 
 ## Installation
 
@@ -18,9 +21,9 @@ yarn add vuejs-date-calendar
 
 ```js
 import Vue from 'vue'
-import vuejs-date-calendar from 'vuejs-date-calendar'
+import DateCalendar from 'vuejs-date-calendar'
 
-Vue.use(vuejs-date-calendar)
+Vue.use(DateCalendar)
 ```
 
 ## Usage
@@ -29,42 +32,48 @@ Once installed, it can be used in a template as simply as:
 
 ```html
 <v-date-calendar
-        date="time"
-        v-model="show">
+    v-model="show"
+    :date="startTime"
+    :option="option"
+    :limit="limit"
+    @cancel="cancel"
+    @confirm="confirm"
+    @change="change">
 </v-date-calendar>
 ```
 
-## Properties
+## Api
 
-|        Name        |  Type         |    Default Value    |                         Description                                                    |
-| ------------------ | ------------- | ------------------- | -------------------------------------------------------------------------------------- |
-| datetime (model)   | Date/String   |                     | Time picker model.                                                                     |
-| disabled           | Boolean       | false               | Input is disabled.                                                                     |
-| label              | string        |                     | Sets input label.                                                                      |
-| width              | Number        | 320                 | The width of the content.                                                              |
-| format             | string        | YYYY-MM-DD HH:mm:ss | Defines the format of a datetime displayed in field.                                   |
-| timePickerFormat   | string        | 24hr                | Defines the format of a time displayed in picker. Available options are ampm and 24hr. |
-| locale             | string        | en-us               | Sets the locale. Accepts a string with a BCP 47 language tag.                          |
-| okText             | string        | OK                  | Sets the text of the ok button.                                                        |
-| clearText          | string        | CLEAR               | Sets the text of the clear button.                                                     |
-| loading            | Boolean | false | see [Vuetify Docs](https://vuetifyjs.com/zh-Hans/components/text-fields "Vuetify Docs") |
-| errorMessages      | String/Array | | see [Vuetify Docs](https://vuetifyjs.com/zh-Hans/components/text-fields "Vuetify Docs") |
-| errorCount         | Number/String | 1 | see [Vuetify Docs](https://vuetifyjs.com/zh-Hans/components/text-fields "Vuetify Docs") |
-| error              | Boolean | false | see [Vuetify Docs](https://vuetifyjs.com/zh-Hans/components/text-fields "Vuetify Docs") |
-| hideDetails        | Boolean | false | see [Vuetify Docs](https://vuetifyjs.com/zh-Hans/components/text-fields "Vuetify Docs") |
-| appendIcon         | String | | see [Vuetify Docs](https://vuetifyjs.com/zh-Hans/components/text-fields "Vuetify Docs") |
-| prependIcon        | String | | see [Vuetify Docs](https://vuetifyjs.com/zh-Hans/components/text-fields "Vuetify Docs") |
+|        Name        |  Type         |    Default Value    |                         Description                                                     |
+| ------------------ | ------------- | ------------------- | ----------------------------------------------------------------------------------------|
+| show               | Boolean       | false               | date calendar model.                                                                    |
+| date               | Object        | require             | startTime = {time : '1990-01-01'}                                                       |
+| option             | Object        | option              | option                                                                                  |
+| limit              | Object        | limit               | limit                                                                                   |
 
 ## Events
 
 |    Name    |    Arguments           |       Description        |
 | -----------| -----------------------| ------------------------ |
-| input      | value (Date/String)    | The updated bound model  |
+| cancel     | value (String)         | cancel                    |
+| confirm    | value (String)         | confirm                   |
+| change     | value (String)         | change                    |
 
-## Slots
+## option
 
-|    Name    |       Description                         |
-| -----------| ----------------------------------------- |
-| dateIcon   | Slot to put custom icon in the date tab.  |
-| timeIcon   | Slot to put custom icon in the time tab.  |
-| actions    | Slot to put custom buttons in the dialog. |
+|        Name        |  Type         |    Default Value    |                         Description                                                     |
+| ------------------ | ------------- | ------------------- | ----------------------------------------------------------------------------------------|
+| type               | String        | 'day'               | 'day' or 'min'                                                                    |
+| week               | Array         | ['Mo', 'Tu'...],    | week arr ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],                                                    |
+| month              | Array         | ['January',...],    | month arr ['January(一月)', 'February(二月)', 'March(三月)',]                                                                                  |
+| format             | String        | 'YYYY-MM-DD'        | type == 'day' ? 'YYYY-MM-DD' : ''YYYY-MM-DD HH:mm''                                                                                 |
+| color              | Object        | {...}               | { checked: '#F50057',header: '#3f51b5',headerText: '#fff'}                                                                                |
+| buttons            | Object        | {...}               | { ok: 'OK',cancel: 'Cancel' }                                                                         |
+| overlayOpacity     | String        | 0.5                 | overlay opacity : 0 - 1                                                                     |
+| dismissible        | Boolean       | true                | click close overlay                                                                   |
+
+## limit
+
+|        Name        |  Type         |    Default Value    |                         Description                                                     |
+| ------------------ | ------------- | ------------------- | ----------------------------------------------------------------------------------------|
+| limit              | Array         | [],                 |  choice date cut {type: 'fromto',from: '1900-01-01',to: '2019-01-01'}                                                                         |
