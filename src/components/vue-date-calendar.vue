@@ -1,10 +1,7 @@
 <template>
   <div class="cov-vue-date">
-    <!--<div class="datepickbox">-->
-    <!--<input type="text" title="input date" class="cov-datepicker" readonly="readonly" :placeholder="option.placeholder" v-model="date.time" :required="required" @click="showCheck" @foucus="showCheck" :style="option.inputStyle ? option.inputStyle : {}" />-->
-    <!--</div>-->
     <transition name="fade">
-      <div class="datepicker-overlay" v-if="showInfo.check" @click="dismiss($event)"
+      <div class="datepicker-overlay" v-if="show" @click="dismiss($event)"
            v-bind:style="{'background' : option.overlayOpacity? 'rgba(0,0,0,'+option.overlayOpacity+')' : 'rgba(0,0,0,0.5)'}">
         <div class="cov-date-body" :style="{'background-color': option.color ? option.color.header : '#3f51b5'}">
           <div class="cov-date-monthly">
@@ -65,7 +62,7 @@
             </div>
           </div>
           <div class="button-box">
-            <span @click="showInfo.check=false">{{option.buttons? option.buttons.cancel : 'Cancel' }}</span>
+            <span @click="$emit('cancel',false)">{{option.buttons? option.buttons.cancel : 'Cancel' }}</span>
             <span @click="picked(true)">{{option.buttons? option.buttons.ok : 'Ok'}}</span>
           </div>
         </div>
@@ -77,11 +74,21 @@
   import moment from 'moment'
 
   export default {
+    model: {
+      prop: 'show',
+      event: 'cancel'
+    },
     props: {
+      show: {
+        type: Boolean,
+        default: false
+      },
+      // 默认时间 例：1990-10-10
       date: {
         type: Object,
         required: true
       },
+      // 默认配置
       option: {
         type: Object,
         default() {
@@ -96,17 +103,6 @@
               header: '#3f51b5',
               headerText: '#fff'
             },
-            inputStyle: {
-              'display': 'inline-block',
-              'padding': '6px',
-              'line-height': '22px',
-              'font-size': '16px',
-              'border': '2px solid #fff',
-              'box-shadow': '0 1PX 3px 0 rgba(0, 0, 0, 0.2)',
-              'border-radius': '2px',
-              'color': '#5F5F5F'
-            },
-            placeholder: 'when?',
             buttons: {
               ok: 'OK',
               cancel: 'Cancel'
@@ -116,6 +112,7 @@
           }
         }
       },
+      // 格式化周，初始结束时间
       limit: {
         type: Array,
         default() {
@@ -153,21 +150,23 @@
       return {
         hours: hours(),
         mins: mins(),
+        // 时间信息
         showInfo: {
           hour: false,
           day: false,
           month: false,
           year: false,
-          check: false
         },
         displayInfo: {
           month: ''
         },
+        // 日期，周末信息
         library: {
           week: this.option.week,
           month: this.option.month,
           year: []
         },
+        // 日期、时间、信息
         checked: {
           oldtime: '',
           currentMoment: null,
@@ -177,12 +176,15 @@
           hour: '00',
           min: '00'
         },
+        // 计算出的天
         dayList: [],
         selectedDays: []
       }
     },
-    watch: {},
+    watch: {
+    },
     mounted() {
+      // 初始化展示
       this.showCheck()
     },
     methods: {
@@ -190,11 +192,13 @@
         n = Math.floor(n)
         return n < 10 ? '0' + n : n
       },
+      // 选择next月份计算天数
       nextMonth(type) {
         let next = null
         type === 'next' ? next = moment(this.checked.currentMoment).add(1, 'M') : next = moment(this.checked.currentMoment).add(-1, 'M')
         this.showDay(next)
       },
+      // 选择日期
       showDay(time) {
         if (time === undefined || !Date.parse(time)) {
           this.checked.currentMoment = moment()
@@ -428,7 +432,6 @@
             }
           }
         }
-        this.showInfo.check = true
       },
       setTime(type, obj, list) {
         for (let item of list) {
@@ -438,6 +441,7 @@
             this.checked[type] = item.value
           }
         }
+        this.picked(false)
       },
       picked(status) {
         if (this.option.type === 'day' || this.option.type === 'min') {
@@ -447,14 +451,16 @@
         } else {
           this.date.time = JSON.stringify(this.selectedDays)
         }
-        status ? this.showInfo.check = false : ''
-        status ? this.$emit('change', this.date.time) : ''
+        if (status){
+          this.$emit('confirm', this.date.time)
+        }else {
+          this.$emit('change', this.date.time)
+        }
       },
       dismiss(evt) {
         if (evt.target.className === 'datepicker-overlay') {
           if (this.option.dismissible === undefined || this.option.dismissible) {
-            this.showInfo.check = false
-            this.$emit('cancel')
+            this.$emit('cancel',false)
           }
         }
       },
@@ -585,22 +591,22 @@
     background: #fff;
     width: 100%;
     display: inline-block;
-    padding: 25px;
+    padding: 12.5px;
     box-sizing: border-box !important;
     -moz-box-sizing: border-box !important;
     -webkit-box-sizing: border-box !important;
     -ms-box-sizing: border-box !important;
     width: 100%;
     max-width: 100%;
-    height: 500px;
+    height: 251px;
     text-align: start !important;
   }
 
   .cov-picker-box td {
-    height: 50px;
-    width: 50px;
+    height: 20px;
+    width: 20px;
     padding: 0;
-    line-height: 50px;
+    line-height: 20px;
     color: #000;
     background: #fff;
     text-align: center;
@@ -622,17 +628,17 @@
     display: inline-block;
     text-align: center;
     cursor: pointer;
-    height: 60px;
+    height: 30px;
     padding: 0;
-    line-height: 60px;
+    line-height: 30px;
     color: #000;
     background: #fff;
     vertical-align: middle;
-    font-size: 24px;
+    font-size: 12px;
   }
 
   .week ul {
-    margin: 0 0 25px;
+    margin: 0 0 12.5px;
     padding: 0;
     list-style: none;
   }
@@ -644,7 +650,7 @@
     background: transparent;
     color: #000;
     font-weight: bold;
-    font-size: 22px;
+    font-size: 16px;
   }
 
   .passive-day {
@@ -663,7 +669,7 @@
   }
 
   .cov-date-monthly {
-    height: 160px;
+    height: 80px;
   }
 
   .cov-date-box {
@@ -676,7 +682,7 @@
     margin: 0;
     vertical-align: middle;
     color: #fff;
-    height: 160px;
+    height: 90px;
     float: left;
     text-align: center;
     cursor: pointer;
@@ -693,9 +699,9 @@
 
   .cov-date-caption {
     width: 60%;
-    padding: 50px 0 !important;
+    padding: 25px 0 !important;
     box-sizing: border-box;
-    font-size: 30px;
+    font-size: 18px;
   }
 
   .cov-date-caption span:hover {
@@ -721,13 +727,13 @@
 
   .cov-date-next::before,
   .cov-date-previous::before {
-    width: 25px;
-    height: 3px;
+    width: 12.5px;
+    height: 2px;
     text-align: center;
     position: absolute;
     background: #fff;
     top: 50%;
-    margin-top: -8px;
+    margin-top: -4px;
     margin-left: -10px;
     left: 50%;
     line-height: 0;
@@ -739,12 +745,12 @@
 
   .cov-date-next::after,
   .cov-date-previous::after {
-    width: 25px;
-    height: 3px;
+    width: 12.5px;
+    height: 2px;
     text-align: center;
     position: absolute;
     background: #fff;
-    margin-top: 10px;
+    margin-top: 5px;
     margin-left: -10px;
     top: 50%;
     left: 50%;
@@ -769,8 +775,8 @@
 
   .date-item {
     text-align: center;
-    font-size: 24px;
-    padding: 10px 0;
+    font-size: 12px;
+    padding: 5px 0;
     cursor: pointer;
   }
 
@@ -792,21 +798,21 @@
   .button-box {
     background: #fff;
     vertical-align: top;
-    height: 70px;
-    line-height: 70px;
+    height: 35px;
+    line-height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px 0;
+    padding: 10px 0;
   }
 
   .button-box span {
-    width: 160px;
-    height: 55px;
+    width: 80px;
+    height: 27.5px;
     cursor: pointer;
     background-color: #3F51B5;
     border-radius: 5px;
-    font-size: 24px;
+    font-size: 14px;
     color: #fff;
     display: flex;
     justify-content: center;
@@ -815,7 +821,7 @@
   }
 
   .button-box span:nth-child(1) {
-    height: 53px;
+    height: 25.5px;
     background-color: #fff;
     border: 1PX #3F51B5 solid;
     color: #3F51B5;
@@ -847,7 +853,7 @@
   .hour-item,
   .min-item {
     padding: 10px;
-    font-size: 36px;
+    font-size: 18px;
     cursor: pointer;
   }
 

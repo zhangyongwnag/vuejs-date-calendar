@@ -1,35 +1,34 @@
 <template>
   <div class="hello">
-    <h1 @click="show">{{ msg }}</h1>
-    <component :is="componentPicker" :date="startTime" :option="option" :limit="limit" @change="chooiseDate"></component>
+    <h1 @click="show = true">Click Me !</h1>
+    <v-date-calendar
+      v-model="show"
+      :date="startTime"
+      :option="option"
+      :limit="limit"
+      @cancel="cancel"
+      @confirm="confirm"
+      @change="change"
+    />
   </div>
 </template>
 
 <script>
+  import dateCalendar from './vue-date-calendar'
+
   export default {
     data() {
       return {
-        msg: 'click me !!!',
-        componentPicker:'',
+        show: false,
+        // 默认时间，必填
         startTime: {
           time: '1990-01-01'
         },
         option: {
           type: 'day',
-          week: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
+          week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
           month: ['January(一月)', 'February(二月)', 'March(三月)', 'April(四月)', 'May(五月)', 'June(六月)', 'July(七月)', 'August(八月)', 'September(九月)', 'October(十月)', 'November(十一月)', 'December(十二月)'],
           format: 'YYYY-MM-DD',
-          placeholder: 'when?',
-          inputStyle: {
-            'display': 'inline-block',
-            'padding': '6px',
-            'line-height': '22px',
-            'font-size': '16px',
-            'border': '2px solid #fff',
-            'box-shadow': '0 1px 3px 0 rgba(0, 0, 0, 0.2)',
-            'border-radius': '2px',
-            'color': '#5F5F5F'
-          },
           color: {
             header: '#3f51b5',
             headerText: '#fff'
@@ -38,14 +37,11 @@
             ok: '确认',
             cancel: '取消'
           },
-          overlayOpacity: 0.5, // 0.5 as default
-          dismissible: true // as true as default
+          overlayOpacity: 0.5, // 遮罩层的透明度 0-1
+          dismissible: true // 点击遮罩层是否关闭
         },
+        // 年份开始 - 结束
         limit: [
-          {
-          type: 'weekday',
-          available: [1, 2, 3, 4, 5 , 6 , 0]
-          },
           {
             type: 'fromto',
             from: '1900-01-01',
@@ -54,18 +50,26 @@
         ],
       }
     },
-    methods:{
-      show(){
-        this.componentPicker = () => import('./vue-datepicker-es6')
+    methods: {
+      // 取消回调
+      cancel() {
+        console.log('cancel')
       },
-      chooiseDate(value){
-        console.log(value)
+      // 确认回调
+      confirm(v) {
+        console.log(v)
       },
+      // 切换日期时间回调
+      change(v) {
+        console.log(v)
+      }
+    },
+    components: {
+      'v-date-calendar': dateCalendar
     }
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .hello {
     display: flex;
