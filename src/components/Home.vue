@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
-    <h1 @click="show = true">Click Me !</h1>
+    <h1 @click="show = true">{{result}}</h1>
+    <h1 @click="changeType(option.type == 'day' ? true : false)">Change Type ({{option.type}})</h1>
     <v-date-calendar
       v-model="show"
       :date="startTime"
@@ -48,6 +49,7 @@
             to: '2019-01-01'
           }
         ],
+        result:'待选择'
       }
     },
     methods: {
@@ -57,11 +59,22 @@
       },
       // 确认回调
       confirm(v) {
-        console.log(v)
+        alert(`您已选择时间${v}`)
+        this.result = v
+        this.show = false
       },
       // 切换日期时间回调
       change(v) {
-        console.log(v)
+        this.result = v
+      },
+      changeType(value){
+        if (value){
+          this.option.type = 'min'
+          this.option.format = 'YYYY-MM-DD HH:mm'
+        }else {
+          this.option.type = 'day'
+          this.option.format = 'YYYY-MM-DD'
+        }
       }
     },
     components: {
@@ -75,20 +88,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
   }
 
   .hello h1 {
+    font-size: 1em;
     user-select: none;
     -webkit-user-select: none;
     white-space: nowrap;
     border-radius: 10px;
-    padding: 20px 100px;
+    padding: 10px 50px;
     box-sizing: border-box;
     background: -webkit-linear-gradient(left top, #67c8b7, #3577cd); /* Safari 5.1 - 6.0 */
     background: -o-linear-gradient(bottom right, #67c8b7, #3577cd); /* Opera 11.1 - 12.0 */
     background: -moz-linear-gradient(bottom right, #67c8b7, #3577cd); /* Firefox 3.6 - 15 */
     background: linear-gradient(to bottom right, #67c8b7, #3577cd); /* 标准的语法（必须放在最后） */
     position: relative;
+    color: #FFF;
   }
 
   .hello h1::before {
