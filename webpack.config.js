@@ -1,62 +1,41 @@
-const webpack = require('webpack');
-const merge = require('webpack-merge');
 const path = require('path');
+const { VueLoaderPlugin } = require('vue-loader')
 
-var commonConfig = {
+module.exports = {
+  entry: path.resolve(__dirname, 'src/plugin.js'),
   output: {
-    path: path.resolve(__dirname + '/dist/'),
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'vuejs-date-calendar.js',
+    libraryTarget: 'umd',
+    library: 'vuejs-date-calendar',
+    umdNamedDefine: true
   },
-
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        include: __dirname,
-        exclude: /node_modules/
+        use: {
+          loader: 'babel-loader',
+          options: {
+            exclude: /node_modules/
+          }
+        }
       },
-
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        use: {
+          loader: 'vue-loader'
+        }
       },
-
       {
         test: /\.css$/,
-        loader: 'css-loader'
+        use: {
+          loader: 'css-loader'
+        }
       }
     ]
   },
-
   plugins: [
-    new webpack.optimize.UglifyJsPlugin( {
-      minimize : true,
-      sourceMap : false,
-      mangle: true,
-      compress: {
-        warnings: false
-      }
-    })
+    new VueLoaderPlugin()
   ]
-};
-
-module.exports = [
-  merge(commonConfig, {
-    entry: path.resolve(__dirname, './src/plugin.js'),
-    output: {
-      filename: 'vuejs-date-calendar.min.js',
-      libraryTarget: 'window',
-      library: 'vuejs-date-calendar',
-    }
-  }),
-
-  merge(commonConfig, {
-    entry: path.resolve(__dirname, './src/plugin.js'),
-    output: {
-      filename: 'vuejs-date-calendar.js',
-      libraryTarget: 'umd',
-      library: 'vuejs-date-calendar',
-      umdNamedDefine: true
-    }
-  })
-];
+}
