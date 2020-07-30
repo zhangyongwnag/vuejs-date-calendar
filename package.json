@@ -1,9 +1,9 @@
 {
   "name": "vuejs-date-calendar",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A Vue.js project",
   "author": "zhangyongwang <765298337@qq.com>",
-  "main": "dist/vuejs-date-calendar.js",
+  "main": "dist/v-data-calendar.js",
   "directories": {
     "dist": "dist"
   },
