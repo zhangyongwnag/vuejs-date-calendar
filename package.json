@@ -9,7 +9,7 @@
   },
   "private": false,
   "scripts": {
-    "build": "webpack --progress --config ./webpack.config.js"
+    "build": "webpack --progress -p --config ./webpack.config.js"
   },
   "repository": {
     "type": "git",

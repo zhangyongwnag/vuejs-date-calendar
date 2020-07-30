@@ -1,5 +1,5 @@
 # vuejs-date-calendar
-[![Vue](https://img.shields.io/badge/vue-2.5.2-brightgreen.svg)](https://github.com/vuejs/vue)
+[![Vue](https://img.shields.io/badge/vue-2.6.11-brightgreen.svg)](https://github.com/vuejs/vue)
 [![npm version](https://img.shields.io/npm/v/vuejs-date-calendar)](https://www.npmjs.com/package/vuejs-date-calendar)
 [![CircleCI](https://img.shields.io/circleci/build/github/zhangyongwnag/vuejs-date-calendar/master)](https://circleci.com/gh/zhangyongwnag/workflows/vuejs-date-calendar)
 [![GitHub](https://img.shields.io/github/license/zhangyongwnag/vuejs-date-calendar)](https://github.com/zhangyongwnag/vuejs-date-calendar/blob/master/LICENSE)
