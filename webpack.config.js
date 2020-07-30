@@ -1,13 +1,16 @@
 const path = require('path');
-const { VueLoaderPlugin } = require('vue-loader')
+const webpack = require('webpack')
+const {VueLoaderPlugin} = require('vue-loader')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
+  mode: 'production',
   entry: path.resolve(__dirname, 'src/plugin.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'vuejs-date-calendar.js',
+    filename: 'v-data-calendar.js',
     libraryTarget: 'umd',
-    library: 'vuejs-date-calendar',
+    library: 'v-data-calendar',
     umdNamedDefine: true
   },
   module: {
@@ -29,13 +32,17 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: {
-          loader: 'css-loader'
-        }
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
       }
     ]
   },
   plugins: [
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    // webpack插件
+    new UglifyJsPlugin()
   ]
 }

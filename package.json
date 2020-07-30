@@ -1,6 +1,6 @@
 {
   "name": "vuejs-date-calendar",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "A Vue.js project",
   "author": "zhangyongwang <765298337@qq.com>",
   "main": "dist/vuejs-date-calendar.js",
@@ -9,7 +9,7 @@
   },
   "private": false,
   "scripts": {
-    "build": "webpack --progress -p --config ./webpack.config.js"
+    "build": "webpack --progress --config ./webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,8 @@
     "@babel/preset-env": "^7.10.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.0.0",
+    "style-loader": "^1.2.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "vue-loader": "^15.9.3",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",

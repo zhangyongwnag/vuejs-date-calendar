@@ -3,11 +3,13 @@
 /build
 /config
 /static
-.babelrc
+/example
 .editorconfig
 .eslintignore
 .eslintrc
 .postcssrc
+debug.log
 index.html
 .npmignore
+.idea
 yarn
